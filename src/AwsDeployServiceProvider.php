@@ -14,6 +14,11 @@ class AwsDeployServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\AwsEC2Backup::class
+            ]);
+        }
     }
 
     /**
@@ -23,6 +28,13 @@ class AwsDeployServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+
+//        $this->publishes([
+//            __DIR__ . '/config/services.php' => config_path('services.php'),
+//        ]);
+//
+//        $this->mergeConfigFrom(
+//            __DIR__ . '/config/services.php', 'services'
+//        );
     }
 }

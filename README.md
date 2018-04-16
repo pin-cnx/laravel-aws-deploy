@@ -1,5 +1,6 @@
 # laravel-aws-deploy
-Deploy to auto scale without down time. By
+The artisan command to deploy to aws EC2 auto scale without down time.
+This command will doing follow step.
  1. Backup an master instance to AMI
  2. Create Launch configuration with those AMI
  3. Update it to auto scale
@@ -62,13 +63,13 @@ You can have many profiles, it will do them all in sequence(or just specify prof
 
 Run all profiles
 
-```
+```bash
 $ php artisan ec2backup
 ```
 
 or just one profile
 
-```
+```bash
 $ php artisan ec2backup --profile AnyName
 ```
 

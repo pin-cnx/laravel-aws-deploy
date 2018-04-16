@@ -1,6 +1,6 @@
 <?php
 
-namespace pincnx\laravelAwsDeploy;
+namespace pinCnx\laravelAwsDeploy;
 
 use Illuminate\Support\ServiceProvider;
 

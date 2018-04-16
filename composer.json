@@ -1,5 +1,5 @@
 {
-  "name": "pincnx/laravelAwsDeploy",
+  "name": "pincnx/laravel-aws-deploy",
   "description": "Deploy to auto scale without down time. By backup an master instance to AMI, create Launch configuration with those AMI, update it to auto scale, generate new instance, terminate the old instances.",
   "type": "laravel-package",
   "require": {
@@ -15,7 +15,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "pincnx\\laravelAwsDeploy\\AwsDeployServiceProvider"
+        "pinCnx\\laravelAwsDeploy\\AwsDeployServiceProvider"
       ]
     }
   }

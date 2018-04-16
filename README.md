@@ -71,3 +71,7 @@ or just one profile
 ```
 $ php artisan ec2backup --profile AnyName
 ```
+
+## License
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

@@ -35,7 +35,7 @@ You can have many profiles, it will do them all in sequence(or just specify prof
                 'AutoScalingGroupName' => 'The auto scale group name',
                 'SecurityGroups' => 'The security group of instance ie. sg-123456',
                 'InstanceType' => 'Instance type ie. t2.micro',
-                'VolumeSize' => 30, // SSD size
+                'VolumeSize' => 30, //(Optional) Default:30 SSD size
                 'region' => ['ap-southeast-1a','ap-southeast-1b'], // Region to spawn instances
                 'NoReboot' => true, //(Optional) Default:false Is it will reboot the master instance to make AMI
                 'IsTerminateCurrentInstance' => true, //(Optional) Default:false Is it will terminate the old launch confuguration's instance

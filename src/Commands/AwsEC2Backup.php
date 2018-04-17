@@ -273,7 +273,7 @@ class AwsEC2Backup extends Command
                             'DeviceName' => '/dev/sda1',
                             'Ebs' => array(
                                 //'SnapshotId' => $snapshot_,
-                                'VolumeSize' => $profile['VolumeSize'],
+                                'VolumeSize' => $profile['VolumeSize']?$profile['VolumeSize']:30,
                                 'VolumeType' => 'gp2',
                                 'DeleteOnTermination' => true,
                             ),

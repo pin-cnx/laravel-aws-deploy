@@ -5,6 +5,9 @@
   "require": {
     "aws/aws-sdk-php": "^3.54"
   },
+  "autoload": {
+    "psr-0": {"pinCnx\\laravelAwsDeploy": "src/"}
+  },
   "license": "MIT",
   "authors": [
     {

@@ -35,13 +35,11 @@ You can have many profiles, it will do them all in sequence(or just specify prof
                 'AutoScalingGroupName' => 'The auto scale group name',
                 'SecurityGroups' => 'The security group of instance ie. sg-123456',
                 'InstanceType' => 'Instance type ie. t2.micro',
-
-
                 'VolumeSize' => 30, // SSD size
                 'region' => ['ap-southeast-1a','ap-southeast-1b'], // Region to spawn instances
-                'NoReboot' => True, // Is it will reboot the master instance to make AMI
-                'IsTerminateCurrentInstance' => true, // Is it will terminate the old launch confuguration's instance
-                'AMI_TAGS' => [ // What ever tag you need for the new instances
+                'NoReboot' => true, //(Optional) Default:false Is it will reboot the master instance to make AMI
+                'IsTerminateCurrentInstance' => true, //(Optional) Default:false Is it will terminate the old launch confuguration's instance
+                'AMI_TAGS' => [ // (Optional) What ever tag you need for the new instances
                     [
                         'Key' => 'stage',
                         'Value' => 'aws-deploy',
@@ -51,8 +49,7 @@ You can have many profiles, it will do them all in sequence(or just specify prof
                         'Value' => 'aws-deploy',
                     ]
                 ]
-
-                , 'UserData' => "#!/bin/bash \n" . // The first boot command to the instances
+                , 'UserData' => "#!/bin/bash \n" . // (Optional)The first boot command to the instances
                     "#su - www-data -c \"php /var/www/html/artisan queue:restart\""
             ]
         ]

@@ -137,7 +137,7 @@ class AwsEC2Backup extends Command
                 // Name is required
                 'Name' => $profiles[$Key]['confName'],
                 'Description' => $profiles[$Key]['confName'],
-                'NoReboot' => false,
+                'NoReboot' => $profiles[$Key]['NoReboot']?true:false,
                 /*
                     'BlockDeviceMappings' => array(
                         array(

@@ -28,13 +28,8 @@ class AwsDeployServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
-//        $this->publishes([
-//            __DIR__ . '/config/services.php' => config_path('services.php'),
-//        ]);
-//
-//        $this->mergeConfigFrom(
-//            __DIR__ . '/config/services.php', 'services'
-//        );
+        $this->mergeConfigFrom(
+            __DIR__ . '/config/services.php', 'services'
+        );
     }
 }

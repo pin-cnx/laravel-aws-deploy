@@ -137,7 +137,7 @@ class AwsEC2Backup extends Command
                 // Name is required
                 'Name' => $profiles[$Key]['confName'],
                 'Description' => $profiles[$Key]['confName'],
-                'NoReboot' => $profiles[$Key]['NoReboot']?true:false,
+                'NoReboot' => $profiles[$Key]['NoReboot'] ? true : false,
                 /*
                     'BlockDeviceMappings' => array(
                         array(
@@ -273,7 +273,7 @@ class AwsEC2Backup extends Command
                             'DeviceName' => '/dev/sda1',
                             'Ebs' => array(
                                 //'SnapshotId' => $snapshot_,
-                                'VolumeSize' => $profile['VolumeSize']?$profile['VolumeSize']:30,
+                                'VolumeSize' => $profile['VolumeSize'] ? $profile['VolumeSize'] : 30,
                                 'VolumeType' => 'gp2',
                                 'DeleteOnTermination' => true,
                             ),
@@ -535,6 +535,53 @@ class AwsEC2Backup extends Command
                     'SnapshotId' => $SnapshotId,
                 ));
             }
+
+
+            // Delete launch conf
+            $clientAs = new AutoScalingClient($awsProfile);
+            $result = $clientAs->describeLaunchConfigurations();
+
+            $LaunchConfigurationsArrayTmp = $result['LaunchConfigurations'];
+
+            // Do the filter
+            $LaunchConfigurationsArray = [];
+            foreach ($LaunchConfigurationsArrayTmp as $LaunchConfiguration) {
+                $name = $LaunchConfiguration['LaunchConfigurationName'];
+                if (strpos($name, $profile['AMI_PREFIX'] . '-') === 0) {
+                    $LaunchConfigurationsArray[] = $LaunchConfiguration;
+                }
+            }
+
+
+            $countLaunchConfigurations = count($LaunchConfigurationsArray);
+
+            $this->info("Total LaunchConfigurations so far $countLaunchConfigurations" . PHP_EOL);
+            $this->info("But keep total only $AIM_TO_KEEP_DAY days or $AIM_TO_KEEP_AMOUNT LaunchConfigurations" . PHP_EOL);
+
+
+            for ($i = $countLaunchConfigurations - 1 - $AIM_TO_KEEP_AMOUNT; $i >= 0; $i--) {
+                $LaunchConfiguration = $LaunchConfigurationsArray[$i];
+                $LaunchConfigurationName = $LaunchConfiguration['LaunchConfigurationName'];
+                $CreationDate = $LaunchConfiguration['CreatedTime'];
+
+                $datePHP = strtotime(substr($CreationDate, 0, 10));
+                //echo date("jS F, Y",$datePHP);
+
+                if (time() - $datePHP < $AIM_TO_KEEP_DAY * 24 * 60 * 60) {
+                    $this->info("Skip LaunchConfiguration Crated on $CreationDate $LaunchConfigurationName " . PHP_EOL);
+                    continue;
+                }
+                //echo $datePHP;
+
+                $this->info("Delete LaunchConfiguration Crated on $CreationDate $LaunchConfigurationName " . PHP_EOL);
+                $result = $clientAs->deleteLaunchConfiguration([
+                    'LaunchConfigurationName' => $LaunchConfigurationName, // REQUIRED
+                ]);
+
+
+            }
+
+
         }
 
 

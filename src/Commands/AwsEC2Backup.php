@@ -295,7 +295,7 @@ class AwsEC2Backup extends Command
                     //	'Enabled' => true || false,
                     //),
                     //'SpotPrice' => 'string',
-                    //'IamInstanceProfile' => 'webserver',
+                    'IamInstanceProfile' => array_get($profile, 'IamInstanceProfile'),
                     //'EbsOptimized' => true || false,
                     'AssociatePublicIpAddress' => true,
                     //'PlacementTenancy' => 'string',//*/

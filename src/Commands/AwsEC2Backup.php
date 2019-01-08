@@ -116,7 +116,11 @@ class AwsEC2Backup extends Command
                 'DryRun' => false,
                 'InstanceIds' => array($profile['InstanceId']),
             ));
-
+            
+            if(count($result['InstanceStatuses'])==0){
+                throw new Exception("Instance not found ID: {$profile['InstanceId']}");
+            }
+            
             $InstanceState_Code = $result['InstanceStatuses'][0]['InstanceState']['Code'];
             $SystemStatus_Status = $result['InstanceStatuses'][0]['SystemStatus']['Status'];
 

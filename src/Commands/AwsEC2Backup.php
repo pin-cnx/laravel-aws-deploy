@@ -263,7 +263,7 @@ class AwsEC2Backup extends Command
                     'ImageId' => $profile['ImageId'],
                     'KeyName' => $profile['KeyName'],
                     'SecurityGroups' => array($profile['SecurityGroups']),
-                    'UserData' => base64_encode(array_get($profile, 'UserData')),
+                    'UserData' => base64_encode(array_key_exists('UserData',$profile)?$profile['UserData']:''),
 //                    'InstanceType' => "t2.medium",
                     'InstanceType' => $profile['InstanceType'],
                     /*'InstanceId' => 'string',
@@ -299,7 +299,7 @@ class AwsEC2Backup extends Command
                     //	'Enabled' => true || false,
                     //),
                     //'SpotPrice' => 'string',
-                    'IamInstanceProfile' => array_get($profile, 'IamInstanceProfile'),
+                    'IamInstanceProfile' => array_key_exists('IamInstanceProfile',$profile)?$profile['IamInstanceProfile']:'',
                     //'EbsOptimized' => true || false,
                     'AssociatePublicIpAddress' => true,
                     //'PlacementTenancy' => 'string',//*/

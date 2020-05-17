@@ -20,7 +20,7 @@ $ composer require pin-cnx/laravel-aws-deploy
 ```
 
 ## Add this config to your services.php
-You can have many profiles, it will do them all in sequence(or just specify profile see in how to run the command)
+Modify services.php add following configuration. You can have many profiles, it will do them all in sequence(or just specify profile see in how to run the command)
 
 ```php
 'ec2' => [

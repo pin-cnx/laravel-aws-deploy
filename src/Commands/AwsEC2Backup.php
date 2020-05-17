@@ -257,9 +257,9 @@ class AwsEC2Backup extends Command
             if ($profile['AutoScalingGroupName']) {
                 //*/
                 $this->info("Create Launch Configuration" . PHP_EOL);
-                $clientAs->createLaunchConfiguration(array(
+                $createLaunchConfiguration = [
                     // LaunchConfigurationName is required
-                    'LaunchConfigurationName' => $profiles[$Key]['confName'],
+                'LaunchConfigurationName' => $profiles[$Key]['confName'],
                     'ImageId' => $profile['ImageId'],
                     'KeyName' => $profile['KeyName'],
                     'SecurityGroups' => array($profile['SecurityGroups']),
@@ -299,11 +299,15 @@ class AwsEC2Backup extends Command
                     //	'Enabled' => true || false,
                     //),
                     //'SpotPrice' => 'string',
-                    'IamInstanceProfile' => array_key_exists('IamInstanceProfile',$profile)?$profile['IamInstanceProfile']:'',
+                    //'IamInstanceProfile' => 'string',
                     //'EbsOptimized' => true || false,
                     'AssociatePublicIpAddress' => true,
                     //'PlacementTenancy' => 'string',//*/
-                ));//*/
+                ];
+                if(array_key_exists('IamInstanceProfile',$profile) && $profile['IamInstanceProfile']){
+                    $createLaunchConfiguration[ 'IamInstanceProfile'] = $profile['IamInstanceProfile'];
+                }
+                $clientAs->createLaunchConfiguration($createLaunchConfiguration);//*/
 
 
                 /*$result = $clientAs->describeLaunchConfigurations(array(

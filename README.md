@@ -77,6 +77,9 @@ $ php artisan ec2backup --profile AnyName
 #### AWS HTTP error: SSL CA bundle not found
 for some reason aws need to have ca-bundle.crt with curl lib to run. So copy the ca-bundle.crt from this git repository then put it to your project at /config/ca-bundle.crt
 
+#### 401 Unauthorized
+don't forgot to add env EC2_KEY and EC2_SECRET which has permission to access EC2
+
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.

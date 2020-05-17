@@ -32,7 +32,7 @@ Modify services.php add following configuration. You can have many profiles, it 
                 // The value with *** need to change to your own aws component name
                 'AMI_PREFIX' => 'AWSDEPLOY', // Prefix for the AMI just for easy to regconize ie. AWSDEPLOY'
                 'InstanceId' => '***i-0123456789abcdef', //The master instance id to clone ie. i-0123456789abcdef
-                'KeyName' => '***server.pem', // The pem key name to access to the auto scale's instances
+                'KeyName' => '***serverkey', // The pem key name to access to the auto scale's instances
                 'AutoScalingGroupName' => '***my-auto-scale', // The auto scale group name,
                 'SecurityGroups' => '***sg-123456', // The security group of instance ie. sg-123456
                 'InstanceType' => env('EC2_SIZE','t3.nano') , // 'Instance type ie. t2.micro',

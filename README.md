@@ -29,17 +29,18 @@ Modify services.php add following configuration. You can have many profiles, it 
         'region' => env('EC2_REGION', 'ap-southeast-1'),
         'profiles' => [
             'AnyName' => [
-                'AMI_PREFIX' => 'Prefix for the AMI just for easy to regconize ie. AWSDEPLOY',
-                'InstanceId' => 'The master instance id to clone ie. i-0123456789abcdef',
-                'KeyName' => "The pem key name to access to the auto scale's instances" ,
-                'AutoScalingGroupName' => 'The auto scale group name',
-                'SecurityGroups' => 'The security group of instance ie. sg-123456',
-                'InstanceType' => 'Instance type ie. t2.micro',
+                // The value with *** need to change to your own aws component name
+                'AMI_PREFIX' => 'AWSDEPLOY', // Prefix for the AMI just for easy to regconize ie. AWSDEPLOY'
+                'InstanceId' => '***i-0123456789abcdef', //The master instance id to clone ie. i-0123456789abcdef
+                'KeyName' => '***server.pem', // The pem key name to access to the auto scale's instances
+                'AutoScalingGroupName' => '***my-auto-scale', // The auto scale group name,
+                'SecurityGroups' => '***sg-123456', // The security group of instance ie. sg-123456
+                'InstanceType' => env('EC2_SIZE','t3.nano') , // 'Instance type ie. t2.micro',
                 'VolumeSize' => 30, //(Optional) Default:30 SSD size
                 'region' => ['ap-southeast-1a','ap-southeast-1b'], // Region to spawn instances
-                'NoReboot' => true, //(Optional) Default:false Is it will reboot the master instance to make AMI
-                'IsTerminateCurrentInstance' => true, //(Optional) Default:false Is it will terminate the old launch confuguration's instance
-                'IamInstanceProfile' => 'iamwebserver', //(Optional) Default:null
+                'NoReboot' => false, //(Optional) Default:false Is it will reboot the master instance to make AMI
+                'IsTerminateCurrentInstance' => true, //(Optional) Default:true Is it will terminate the old instance which launch with old configuration.
+                'IamInstanceProfile' => null, //(Optional) Default:null
                 'AMI_TAGS' => [ // (Optional) What ever tag you need for the new instances
                     [
                         'Key' => 'stage',
